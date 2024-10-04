@@ -11,14 +11,18 @@ import Footer from './Footer';
 //importing the Header from the Header.js file
 import Header from './Header';
 
+//for part 6 putting the header into the read section allowing read to be shown when you click on read 
+//and create to be shown when you click on create 
+//content does not show anything as you are already on that page
+
 function App() {
   return (
     <Router>
     <NavigationBar />
     <Routes>
       <Route path="/home" element={<Content />} />
-      <Route path="/read" element={<h1>Read Component</h1>} />
-      <Route path="/create" element={<h1>Create Component</h1>} />
+      <Route path="/read" element={<Header />} />
+      <Route path="/create" element={<Footer />} />
     </Routes>
     <Footer />
   </Router>

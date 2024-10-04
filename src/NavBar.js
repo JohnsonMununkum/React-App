@@ -1,8 +1,9 @@
+//imports these components which allows you to use these imports
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-
+//simple navbar tool which allows you to navigate from page to page 
 const NavigationBar = () => {
   return (
         <Navbar bg="dark" data-bs-theme="dark">
