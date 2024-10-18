@@ -57,7 +57,11 @@ const Read = () => {
            setMovies(response.data.movies);
             })
             //,catch if something goes wrong 
-            .catch()
+            .catch(
+              (error)=>{
+                console.log(error);
+              }
+            )
         }
       );
       
