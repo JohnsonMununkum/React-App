@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+//imoported axios to allow it to be used
+import axios from "axios";
 
 //footer.js
 //create reuseable Create component
@@ -22,6 +23,11 @@ const Create = () => {
     };
     console.log(movieData);
 
+    //post axios gets the url of the site and allows it to be loaded 
+    //movieData for what to be outputted
+    axios.post('http://localhost:4000/api/movies',movieData)
+    .then()
+    .catch();
   }
 
   //inputting title year & poster

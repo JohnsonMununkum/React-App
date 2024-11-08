@@ -47,7 +47,8 @@ const Read = () => {
             //axios.get makes a http request to our api doing it in the background
             //app will continue to work while this is going on
             //result of this is called a promise
-            axios.get('https://jsonblob.com/api/jsonblob/1287718524221775872')
+            //https://jsonblob.com/api/jsonblob/1287718524221775872
+            axios.get('http://localhost:4000/api/movies')
             //.then this will happen succesfully
             //callbackfunctions
             //execute .then when it has excuted successfully
