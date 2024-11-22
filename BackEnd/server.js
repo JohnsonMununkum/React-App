@@ -2,9 +2,12 @@ const express = require('express');
 const app = express();
 const port = 4000;
 
+//enable CORS for your server:
 const cors = require('cors');
 app.use(cors());
 
+//allows your frontend app (React) to make API requests to the backend (Express)
+// without encountering CORS-related issues.
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -12,13 +15,17 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+//Adding body-parser middleware
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//Connect to MongoDB in server.js
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:admin@martinscluster.w5rtkz0.mongodb.net/DB14');
 
+//Define schema and data model
 const movieSchema = new mongoose.Schema({
   title:String,
   year:String,
@@ -27,11 +34,13 @@ const movieSchema = new mongoose.Schema({
 
 const movieModel = new mongoose.model('myMovies',movieSchema);
 
+//Retrieve All Data
 app.get('/api/movies', async (req, res) => {
     const movies = await movieModel.find({});
     res.status(200).json({movies})
 });
 
+//Retrieve All Data by ID
 app.get('/api/movie/:id', async (req ,res)=>{
   const movie = await movieModel.findById(req.params.id);
   res.json(movie);
@@ -43,6 +52,7 @@ app.put('/api/movie/:id', async (req, res) => {
   res.send(movie);
 });
 
+//Add Data to MongoDB
 app.post('/api/movies',async (req, res)=>{
     console.log(req.body.title);
     const {title, year, poster} = req.body;
