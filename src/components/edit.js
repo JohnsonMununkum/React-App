@@ -6,6 +6,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
+//retrieve the specific movie data from the database.
+//oad and edit details for a single, specific movie.
+//navigation to different routes programmatically.
+//is used after the user submits the edited movie information.
+//Once the update is saved, useNavigate is called to redirect the user back to the "read" page where they can view all movies, including the one they just edited.
 export default function Edit(props) {
   let { id } = useParams();
   const [title, setTitle] = useState("");
