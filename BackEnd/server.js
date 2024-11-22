@@ -37,6 +37,7 @@ app.get('/api/movie/:id', async (req ,res)=>{
   res.json(movie);
 })
 
+//updates the movie item when the thing is updated
 app.put('/api/movie/:id', async (req, res) => {
   let movie = await movieModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
   res.send(movie);
