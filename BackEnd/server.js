@@ -52,6 +52,15 @@ app.put('/api/movie/:id', async (req, res) => {
   res.send(movie);
 });
 
+app.delete('/api/movie/:id', async (req, res) => {
+  
+  console.log('Deleting movie with ID:', req.params.id);
+  const movie = await movieModel.findByIdAndDelete(req.params.id);
+  res.status(200).send({ message: "Movie deleted successfully", movie });
+  
+}
+);
+
 //Add Data to MongoDB
 app.post('/api/movies',async (req, res)=>{
     console.log(req.body.title);
@@ -63,9 +72,12 @@ app.post('/api/movies',async (req, res)=>{
     res.status(201).json({"message":"Movie Added!",Movie:newMovie});
 })
 
+
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
+
 
 // {
 //   "Title": "Avengers: Infinity War (server)",

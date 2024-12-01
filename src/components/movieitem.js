@@ -6,26 +6,26 @@ import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 
+const MovieItem = (props) => {
+  if (!props.mymovie) {
+    console.warn("Movie item data is missing");
+    return null; // Prevent rendering if data is undefined
+  }
 
-
-//defines the path the Link component should navigate to when clicked.
-//This URL structure matches the route defined in App.js (/edit/:id) and allows React Router to capture the movie’s ID and pass it to the Edit component
-const MovieItem = (props)=> {
   const handleDelete = (e) => {
     e.preventDefault();
-    axios.delete('http://localhost:4000/api/movie/' + props.myMovie._id)
-        .then(() => {
-            props.Reload(); // Refresh the movie list after deletion
-        })
-        .catch((error) => {
-            console.error("Error deleting movie:", error);
-        });
-};
-
-
-  useEffect(() => {
-    console.log("Movie Item:", props.mymovie);
-  }, [props.mymovie]); // Only run this effect when the mymovie prop changes
+    if (!props.mymovie._id) {
+      console.error("Cannot delete movie without an ID");
+      return;
+    }
+    axios.delete(`http://localhost:4000/api/movie/${props.mymovie._id}`)
+      .then(() => {
+        props.Reload(); // Refresh movie list
+      })
+      .catch((error) => {
+        console.error("Error deleting movie:", error);
+      });
+  };
 
   return (
     <div>
@@ -36,16 +36,12 @@ const MovieItem = (props)=> {
             <img src={props.mymovie.poster} alt={props.mymovie.title} />
             <footer>{props.mymovie.year}</footer>
           </blockquote>
-
         </Card.Body>
-        <Link to={"/edit/" + props.mymovie._id} className="btn btn-primary">Edit</Link>
+        <Link to={`/edit/${props.mymovie._id}`} className="btn btn-primary">Edit</Link>
       </Card>
-            {/* Other movie details */}
-            <Button variant="danger" onClick={handleDelete}>Delete</Button>
-
-
+      <Button variant="danger" onClick={handleDelete}>Delete</Button>
     </div>
   );
-}
+};
 
 export default MovieItem;
