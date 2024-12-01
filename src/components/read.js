@@ -5,6 +5,7 @@ import axios from "axios";
 const Read = () => {
 
   const [movies, setMovies] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     
@@ -17,11 +18,28 @@ const Read = () => {
         console.log(error);
       });
   });
+  
+  const Reload = () => {
+    console.log("Reloading movie data...");
+    axios.get('http://localhost:4000/api/movies')
+        .then((response) => {
+            setData(response.data.movies);
+        })
+        .catch((error) => {
+            console.error("Error reloading data:", error);
+        });
+};
+
+useEffect(() => {
+  Reload();
+}, []);
+
+
 
   return (
     <div>
-      <h3>Hello from read component!</h3>
-      <Movies myMovies={movies} />
+      <h3>Movie List</h3>
+            <Movies myMovies={data} ReloadData={Reload} />
     </div>
   );
 }
