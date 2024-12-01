@@ -1,4 +1,5 @@
 import Movies from "./movies";
+//imported axios
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -19,6 +20,7 @@ const Read = () => {
       });
   });
   
+  //handle data reloading
   const Reload = () => {
     console.log("Reloading movie data...");
     axios.get('http://localhost:4000/api/movies')
@@ -30,6 +32,7 @@ const Read = () => {
         });
 };
 
+//data reloading continued
 useEffect(() => {
   Reload();
 }, []);
