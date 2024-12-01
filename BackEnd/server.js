@@ -52,6 +52,7 @@ app.put('/api/movie/:id', async (req, res) => {
   res.send(movie);
 });
 
+//handle delete request
 app.delete('/api/movie/:id', async (req, res) => {
   
   console.log('Deleting movie with ID:', req.params.id);
